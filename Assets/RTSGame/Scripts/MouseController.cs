@@ -4,7 +4,7 @@ using System.Collections;
 public class MouseController : Singleton<MouseController>
 {
 	//public Transform currentSelectedObject;
-	public LayerMask rightClickableMask;
+	//public LayerMask rightClickableMask;
 
 	public MouseTarget mouseTarget;
 
@@ -38,7 +38,7 @@ public class MouseController : Singleton<MouseController>
 	void Awake ()
 	{
 		mouseTarget = FindObjectOfType<MouseTarget> ();
-		rightClickableMask = mouseTarget.rightClickables;
+		//rightClickableMask = mouseTarget.rightClickables;
 	}
 	
 	// Update is called once per frame
@@ -124,7 +124,7 @@ public class MouseController : Singleton<MouseController>
 		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
 		RaycastHit hit;
 
-		if (Physics.Raycast (ray, out hit, Mathf.Infinity, rightClickableMask)) {
+		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 			//pass right click target to callback
 			string hitLayerName = LayerMask.LayerToName (hit.transform.gameObject.layer);
 			

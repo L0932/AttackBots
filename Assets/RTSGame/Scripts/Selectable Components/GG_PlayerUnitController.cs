@@ -112,6 +112,13 @@ public class GG_PlayerUnitController : GG_Controller
 		return tr.position;
 	}
 
+	public void RotateTowardsTarget (Vector3 _relativeDirection)
+	{
+		transform.rotation = Quaternion.LookRotation (_relativeDirection);
+
+		//RotateTowards (_dir);
+	}
+
 	protected new void Update ()
 	{
 		if (canMove) {
@@ -128,6 +135,7 @@ public class GG_PlayerUnitController : GG_Controller
 			//Rotate character towards targetDirection (filled in by CalculateVelocity)
 			RotateTowards (targetDirection);
 
+			//RotateTowardsTarget (targetDirection);
 			controller.SimpleMove (velocity);
 
 			// Move character in direction

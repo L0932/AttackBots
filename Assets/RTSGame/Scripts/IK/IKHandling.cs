@@ -80,12 +80,20 @@ public class IKHandling : MonoBehaviour
 			animator.SetIKPositionWeight (AvatarIKGoal.RightHand, handWeight);
 			animator.SetIKPosition (AvatarIKGoal.RightHand, (lookPos.position - transform.position));//(lookPos.position - transform.position));
 
-			//animator.SetIKHintPositionWeight (AvatarIKHint.RightElbow, ikWeight);
-			//animator.SetIKHintPosition (AvatarIKHint.RightElbow, hintElbowRight.position);
+			animator.SetIKHintPositionWeight (AvatarIKHint.RightElbow, ikWeight);
+			animator.SetIKHintPosition (AvatarIKHint.RightElbow, hintElbowRight.position);
 
 			//animator.SetIKRotationWeight (AvatarIKGoal.RightHand, handWeight);
 			//animator.SetIKRotation (AvatarIKGoal.RightHand, rightHandIKTarget.rotation);
 		}
+
+		/*	
+		Vector3 relativeToTarget = lookPos.position - transform.position;
+		relativeToTarget.y = 0;
+		transform.rotation = Quaternion.LookRotation (relativeToTarget);
+		//animator.bodyRotation = Quaternion.LookRotation (relativeToTarget);
+		*/
+
 		/*
 		//*** Left and Right Feet ***
 		//Weights: Left and Right Feet

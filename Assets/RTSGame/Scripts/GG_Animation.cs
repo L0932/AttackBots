@@ -147,6 +147,11 @@ public class GG_Animation : MonoBehaviour
 		return angle;
 	}
 
+	public void OnShootAnimationEvent (AnimationEvent val)
+	{
+		Debug.Log ("OnShootAnimationEvent() called in GG_Animation");
+	}
+
 	/*
 	// Animation Events
 	public void OnStartShootAnimationEvent (AnimationEvent val)

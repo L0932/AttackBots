@@ -50,7 +50,7 @@ public class PlayerUnitAttackModuleIK : PlayerUnitAttackModule
 				//currentFireArm.FireWeapon (toTarget);
 
 				animationIK.ShootTarget (activeNearbyThreatTarget, animationTime);
-
+				unitController.RotateTowardsTarget (activeNearbyThreatTarget.position - transform.position);
 
 				yield return new WaitForSeconds (animationTime);
 			} else {
