@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SelectableComponent : MonoBehaviour
+public class SelectableComponent : NetworkBehaviour
 {
 	public LayerMask layerTest;
 
@@ -17,7 +18,7 @@ public class SelectableComponent : MonoBehaviour
 
 	public bool Selected { get { return selected; } set { selected = value; } }
 
-	void Start ()
+	void Awake ()
 	{
 		registered = false;
 		hovered = false;
@@ -45,8 +46,9 @@ public class SelectableComponent : MonoBehaviour
 			if (statusBar != null)
 				statusBar.SetActive (true);
 
-
-			MouseController.OnRightClick += OnRightClick;
+			if (isLocalPlayer) {
+				MouseController.OnRightClick += OnRightClick;
+			}
 			registered = true;
 		}
 	}
@@ -65,8 +67,9 @@ public class SelectableComponent : MonoBehaviour
 			if (statusBar != null)
 				statusBar.SetActive (false);
 
-
-			MouseController.OnRightClick -= OnRightClick;
+			if (isLocalPlayer) {
+				MouseController.OnRightClick -= OnRightClick;
+			}
 			registered = false;
 		}
 	}
@@ -105,5 +108,10 @@ public class SelectableComponent : MonoBehaviour
 			//MouseController.Instance.CurrentHoveredLayer = 0;
 			hovered = false;
 		}
+	}
+
+	public override void OnStartLocalPlayer ()
+	{
+		projectorComponent.material = Resources.Load ("Materials/Projectors/Projector_LocalPlayer", typeof(Material)) as Material;
 	}
 }
