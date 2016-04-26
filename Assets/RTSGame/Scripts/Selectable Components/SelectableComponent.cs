@@ -112,6 +112,9 @@ public class SelectableComponent : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
-		projectorComponent.material = Resources.Load ("Materials/Projectors/Projector_LocalPlayer", typeof(Material)) as Material;
+		projectorComponent.material = Resources.Load ("Materials/Projector_LocalPlayer", typeof(Material)) as Material;
+
+		//Material mat = projectorComponent.material = Resources.Load ("Materials/Projectors/Projector_LocalPlayer", typeof(Material)) as Material;
+
 	}
 }
