@@ -20,7 +20,7 @@ public class GG_PlayerUnitController : GG_Controller
 		}
 	}
 
-	public PlayerUnitAttackModule attackModule;
+	public AttackModule attackModule;
 
 	//public Animation anim;
 	public HealthScaler healthScaler;
@@ -55,8 +55,8 @@ public class GG_PlayerUnitController : GG_Controller
 		// anim["awake"].normalizedTime = 1F;
 
 		//Call Start in base script (AIPath)
-		attackModule = GetComponent<PlayerUnitAttackModule> ();
-		animationComponent = GetComponent<GG_Animation> ();
+		attackModule = GetComponent<AttackModule> ();
+		animationComponent = GetComponentInChildren<GG_Animation> ();
 
 		//healthStatus.OnHealthZero += OnHealthZero;
 		//selectableComponent = GetComponent<ControllableComponent> ();
@@ -247,12 +247,12 @@ public class GG_PlayerUnitController : GG_Controller
 		case TargetType.EnemyUnit:
 			//playerSelectedTarget = _mouseTarget;
 			target = null;
-			Debug.Log ("Hostile detected!");
+			//Debug.Log ("Hostile detected!");
 			break;
 		case TargetType.Walkable:
 			//playerSelectedTarget = null;
 			target = playerSelectedTarget.transform;
-			Debug.Log ("Move to position!");
+			//Debug.Log ("Move to position!");
 			break;
 		}
 		/*switch (currentLayer) {

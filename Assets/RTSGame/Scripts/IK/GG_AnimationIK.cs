@@ -14,9 +14,13 @@ public struct IKWeights
 
 public class GG_AnimationIK : GG_Animation
 {
+	public Model robotModel;
 	public float ikSpeed;
 	public IKWeights ikWeights;
 	//public Transform rightHandIKHandle;
+
+	public delegate void CharacterAnimationEvent ();
+	public event CharacterAnimationEvent Event_OnShoot;
 
 	private Vector3 shootTarget;
 	private bool shooting;
@@ -69,7 +73,7 @@ public class GG_AnimationIK : GG_Animation
 		yield return new WaitForSeconds (_time);
 		shooting = false;
 
-		Debug.Log ("shooting set to false");
+		//Debug.Log ("shooting set to false");
 		yield return null;
 	}
 
@@ -110,5 +114,14 @@ public class GG_AnimationIK : GG_Animation
 				//animator.SetIKRotation (AvatarIKGoal.RightHand, shootTarget);}
 			}
 		}
+	}
+
+	public void OnShootAnimationEvent (AnimationEvent val)
+	{
+
+		//robotModel.
+		Debug.Log ("OnShootAnimationEvent called from GG_AnimationIK");
+		//currentFireArm.FireWeapon (activeNearbyThreatTarget.position - transform.position);
+		if (Event_OnShoot != null) Event_OnShoot();
 	}
 }

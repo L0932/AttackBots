@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class PlayerUnitAttackModule : MonoBehaviour
+public class AttackModule : NetworkBehaviour
 {
 	public Firearm currentFireArm;
 	public bool attackNearbyThreats;
@@ -51,7 +52,6 @@ public class PlayerUnitAttackModule : MonoBehaviour
 		if (unitController.PlayerSelectedTarget == null) {
 			unitController.PlayerSelectedTarget.transform = _threat.transform;
 		}*/
-
 		GameObject _mouseSelectedTarget = unitController.PlayerSelectedTarget.selectedTransform.gameObject;
 
 		if (_mouseSelectedTarget != null && _threat == _mouseSelectedTarget) {
@@ -76,11 +76,12 @@ public class PlayerUnitAttackModule : MonoBehaviour
 
 	public void OnShootAnimationEvent (AnimationEvent val)
 	{
+/*		
 		if (activeNearbyThreatTarget != null) {
 			Vector3 toTarget = activeNearbyThreatTarget.position - (transform.position + transform.forward); 
 			currentFireArm.FireWeapon (toTarget);
 		}
 
-		Debug.Log ("OnShootAnimationEvent() called in AttackModule");
+		Debug.Log ("OnShootAnimationEvent() called in AttackModule");*/
 	}
 }

@@ -11,9 +11,9 @@ TagManager:
   - WayPoint
   - Siren
   - Alarm
+  - Model
   - PlayerUnit
   - Projectile
-  - RightClickTarget
   layers:
   - Default
   - TransparentFX

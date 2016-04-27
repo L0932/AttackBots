@@ -3,7 +3,7 @@ using System.Collections;
 
 public class StateController : MonoBehaviour
 {
-	public PlayerUnitAttackModule attackModule;
+	public AttackModule attackModule;
 	public float searchingTurnSpeed = 120f;
 	public float searchingDuration = 4f;
 	public float sightRange = 20f;
@@ -22,7 +22,7 @@ public class StateController : MonoBehaviour
 
 	void Awake ()
 	{
-		attackModule = GetComponent<PlayerUnitAttackModule> ();
+		attackModule = GetComponent<AttackModule> ();
 
 		chaseState = new ChaseState (this);
 		alertState = new AlertState (this);
@@ -42,8 +42,8 @@ public class StateController : MonoBehaviour
 		currentState.UpdateState ();
 	}
 
-	private void OnTriggerEnter (Collider other)
+	/*	private void OnTriggerEnter (Collider other)
 	{
 		currentState.OnTriggerEnter (other);
-	}
+	}*/
 }

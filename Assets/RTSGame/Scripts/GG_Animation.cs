@@ -9,7 +9,7 @@ public class GG_Animation : MonoBehaviour
 	//public Transform targetTempTest;
 	public Animator animator;
 	private AnimatorSetup animatorSetup;
-	private PlayerUnitAttackModule attackModule;
+	private AttackModule attackModule;
 	//private DoneAnimatorSetup animatorSetup;
 
 	private GG_AIPath aiPath;
@@ -18,7 +18,7 @@ public class GG_Animation : MonoBehaviour
 	{
 		animator = GetComponent<Animator> ();
 		animatorSetup = new AnimatorSetup (animator);
-		attackModule = GetComponent<PlayerUnitAttackModule> ();
+		attackModule = GetComponent<AttackModule> ();
 		//hashIDs = new DoneHashIDs();
 		// animatorSetup = new DoneAnimatorSetup(animator, hashIDs);
 
@@ -146,12 +146,7 @@ public class GG_Animation : MonoBehaviour
 
 		return angle;
 	}
-
-	public void OnShootAnimationEvent (AnimationEvent val)
-	{
-		Debug.Log ("OnShootAnimationEvent() called in GG_Animation");
-	}
-
+		
 	/*
 	// Animation Events
 	public void OnStartShootAnimationEvent (AnimationEvent val)

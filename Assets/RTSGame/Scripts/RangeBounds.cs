@@ -4,12 +4,12 @@ using System.Collections;
 public class RangeBounds : MonoBehaviour
 {
 	//public GG_PlayerUnitController unitController;
-	public PlayerUnitAttackModule attackModule;
+	public AttackModule attackModule;
 	public LayerMask detectableMask;
 	// Use this for initialization
 	void Start ()
 	{
-		attackModule = transform.parent.GetComponent<PlayerUnitAttackModule> ();
+		attackModule = transform.parent.GetComponent<AttackModule> ();
 
 		if (attackModule == null) {
 			Debug.LogError ("RangeBounds: an AttackModule needs to be attached to the parent of the object containing RangeBounds!");

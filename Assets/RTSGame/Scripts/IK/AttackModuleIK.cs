@@ -2,7 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerUnitAttackModuleIK : PlayerUnitAttackModule
+public class AttackModuleIK : AttackModule
 {
 	//Inherited variables
 	//public bool attackNearbyThreats;
@@ -14,11 +14,18 @@ public class PlayerUnitAttackModuleIK : PlayerUnitAttackModule
 	// public Transform ActiveThreatTarget{get; set}
 
 	GG_AnimationIK animationIK;
+	public Model robotModel;
 	private bool isCurrentlyShooting;
 
-	void Start ()
+	void Awake ()
 	{
-		animationIK = GetComponent<GG_AnimationIK> ();
+		animationIK = GetComponentInChildren<GG_AnimationIK> ();//GetComponent<GG_AnimationIK> ();
+		animationIK.Event_OnShoot +=  OnShootStart;
+	}
+
+
+	void OnDisable(){
+		animationIK.Event_OnShoot -= OnShootStart;
 	}
 
 	void ShootTarget ()
@@ -80,12 +87,13 @@ public class PlayerUnitAttackModuleIK : PlayerUnitAttackModule
 			activeNearbyThreatTarget = _threat.transform;
 		}
 			
-		if (_threat == unitController.PlayerSelectedTarget.transform.gameObject) {
+
+/*		if (_threat == unitController.PlayerSelectedTarget.transform.gameObject) {
 			if (isCurrentlyShooting) {
 				StopCoroutine ("ShootTarget");
 			}
 			StartCoroutine (ShootTarget (unitController.PlayerSelectedTarget.transform));
-		}
+		}*/
 	}
 
 	public override void RemoveNearbyThreat (GameObject _threat)
@@ -99,5 +107,14 @@ public class PlayerUnitAttackModuleIK : PlayerUnitAttackModule
 			activeNearbyThreatTarget = null; 
 		}
 		detectedThreats.Remove (_threat);
+	}
+
+	// Callback fired by an event in the shoot animation
+	public void OnShootStart()
+	{
+		
+		//robotModel.
+		//Debug.Log ("OnShootAnimationEvent called from attackModuleIK");
+		currentFireArm.FireWeapon (activeNearbyThreatTarget.position - transform.position);
 	}
 }
