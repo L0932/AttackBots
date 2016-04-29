@@ -3,10 +3,12 @@ using System.Collections;
 
 public class IKHandling : MonoBehaviour
 {
-
-	Animator animator;
+	
+	public Model robotModel;
+	public float bodyLookAtWeight;
+	public Animator animator;
 	public float animationSpeed;
-	public AnimationClip[] animationClips;
+	//public AnimationClip[] animationClips;
 
 	public bool ikActive;
 	public bool ikLookAtActive;
@@ -34,12 +36,16 @@ public class IKHandling : MonoBehaviour
 
 	public Transform lookPos;
 
+	private Transform spine;
 	// Use this for initialization
 	void Start ()
 	{
-		animator = GetComponent<Animator> ();
-		animationClips = animator.runtimeAnimatorController.animationClips;
+		//animator = GetComponent<Animator> ();
+		//animationClips = animator.runtimeAnimatorController.animationClips;
 		animationSpeed = 1f;
+
+		robotModel = GetComponentInChildren<Model> ();
+		spine = robotModel.spine;
 		//animationClips[22].
 		//animationClips [22].sp = animationSpeed;
 	}
@@ -47,7 +53,11 @@ public class IKHandling : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		//Debug.DrawRay (transform.position, (lookPos.position - transform.position), Color.green);
+		Debug.DrawRay (transform.position, (lookPos.position - transform.position), Color.green);
+	}
+
+	void LateUpdate(){
+		animator.SetBodyLookAtPosition (spine, lookPos.position, bodyLookAtWeight); // Custom Extension method defined in Utils.cs
 	}
 
 	void OnAnimatorIK ()
@@ -72,7 +82,7 @@ public class IKHandling : MonoBehaviour
 		}
 
 		if (ikLookAtActive) {
-			animator.SetLookAtWeight (lookIKWeight, bodyWeight, headWeight, eyesWeight, clampWeight);
+			animator.SetLookAtWeight (lookIKWeight, 0, headWeight, eyesWeight, clampWeight); // 0 for bodyWeight.
 			animator.SetLookAtPosition (lookPos.position);
 		}
 

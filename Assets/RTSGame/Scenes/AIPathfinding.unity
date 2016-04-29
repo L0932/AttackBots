@@ -260,6 +260,14 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 146354, guid: daf0dc3657b18e743882d1ad15d5e59e, type: 2}
+      propertyPath: m_TagString
+      value: Spine
+      objectReference: {fileID: 0}
+    - target: {fileID: 178710, guid: daf0dc3657b18e743882d1ad15d5e59e, type: 2}
+      propertyPath: m_TagString
+      value: RightHand
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 9599662, guid: daf0dc3657b18e743882d1ad15d5e59e, type: 2}
     - {fileID: 11443656, guid: daf0dc3657b18e743882d1ad15d5e59e, type: 2}
@@ -441,6 +449,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b929abdddabe0c84c9bf4ae66a232098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spine: {fileID: 0}
 --- !u!95 &430042856 stripped
 Animator:
   m_PrefabParentObject: {fileID: 9535840, guid: daf0dc3657b18e743882d1ad15d5e59e,
@@ -464,7 +473,7 @@ MonoBehaviour:
   ikWeights:
     handleWeight: 1
     lookWeight: 1
-    bodyWeight: 0.5
+    bodyWeight: 0
     headWeight: 1
     eyesWeight: 0
     clampWeight: 0.3
@@ -979,6 +988,33 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d442b37dc5b3fc0459a5c6b323f11633, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1588849093
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1588849094}
+  m_Layer: 14
+  m_Name: target
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1588849094
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1588849093}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.31, y: 0.9801824, z: -2.17}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
 --- !u!1001 &1713107707
 Prefab:
   m_ObjectHideFlags: 0
@@ -1286,3 +1322,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b929abdddabe0c84c9bf4ae66a232098, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spine: {fileID: 0}

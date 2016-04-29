@@ -5,6 +5,12 @@ public class Model : MonoBehaviour
 {
 	//public Firearm currentFireArm;
 	// Use this for initialization
+	public Transform spine;
+	public Transform spineDirection;
+
+	void Awake(){
+		//spine = transform.FindChildWithTag ("Spine");
+	}
 
 	public void RotateModelTo (Vector3 targetPos)
 	{

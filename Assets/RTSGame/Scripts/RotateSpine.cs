@@ -4,7 +4,7 @@ using System.Collections;
 public class RotateSpine : MonoBehaviour {
 
 	public Transform target;
-	public float xRot = 1;
+	public float bodyWeight = .45f;
 	public Transform spine;
 
 	// Use this for initialization
@@ -28,6 +28,9 @@ public class RotateSpine : MonoBehaviour {
 		*/
 
 		//spine.rotation = Quaternion.AngleAxis (180, Vector3.right);
-	
+		float angle = Vector3.Angle (target.position-transform.position, transform.forward);
+		int sign = Vector3.Cross (transform.position, target.position).z < 0 ? -1 : 1;
+
+		spine.Rotate ((angle * sign) * bodyWeight, 0, 0);
 	}
 }

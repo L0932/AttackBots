@@ -16,7 +16,7 @@ public class GG_Animation : MonoBehaviour
 	//private DoneHashIDs hashIDs;
 	void Awake ()
 	{
-		animator = GetComponent<Animator> ();
+		animator = GetComponentInChildren<Animator> ();
 		animatorSetup = new AnimatorSetup (animator);
 		attackModule = GetComponent<AttackModule> ();
 		//hashIDs = new DoneHashIDs();

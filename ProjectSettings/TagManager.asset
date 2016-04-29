@@ -14,6 +14,8 @@ TagManager:
   - Model
   - PlayerUnit
   - Projectile
+  - Spine
+  - RightHand
   layers:
   - Default
   - TransparentFX

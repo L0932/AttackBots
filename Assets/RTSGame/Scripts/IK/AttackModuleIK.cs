@@ -21,6 +21,8 @@ public class AttackModuleIK : AttackModule
 	{
 		animationIK = GetComponentInChildren<GG_AnimationIK> ();//GetComponent<GG_AnimationIK> ();
 		animationIK.Event_OnShoot +=  OnShootStart;
+
+		robotModel = GetComponentInChildren<Model> ();
 	}
 
 
@@ -37,10 +39,16 @@ public class AttackModuleIK : AttackModule
 
 	public override void Update ()
 	{
+		// Begin Shooting if...
 		if (attackNearbyThreats && detectedThreats.Count != 0 && activeNearbyThreatTarget != null) {
 			if (!isCurrentlyShooting) {
 				StartCoroutine (ShootTarget (detectedThreats [0].transform));
 			}
+		}
+
+		//While shooting..
+		if(isCurrentlyShooting && activeNearbyThreatTarget != null){
+			robotModel.RotateModelTo (activeNearbyThreatTarget.position);
 		}
 	}
 
@@ -57,7 +65,7 @@ public class AttackModuleIK : AttackModule
 				//currentFireArm.FireWeapon (toTarget);
 
 				animationIK.ShootTarget (activeNearbyThreatTarget, animationTime);
-				unitController.RotateTowardsTarget (activeNearbyThreatTarget.position - transform.position);
+				//unitController.RotateTowardsTarget (activeNearbyThreatTarget.position - transform.position);
 
 				yield return new WaitForSeconds (animationTime);
 			} else {

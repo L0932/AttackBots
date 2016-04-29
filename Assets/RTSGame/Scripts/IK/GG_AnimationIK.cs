@@ -76,7 +76,7 @@ public class GG_AnimationIK : GG_Animation
 		//Debug.Log ("shooting set to false");
 		yield return null;
 	}
-
+		
 	void OnAnimatorIK ()
 	{
 		if (shooting) {
@@ -103,6 +103,7 @@ public class GG_AnimationIK : GG_Animation
 
 				animator.SetLookAtWeight (ikWeights.lookWeight, ikWeights.bodyWeight, ikWeights.headWeight, ikWeights.eyesWeight, ikWeights.clampWeight);
 				animator.SetLookAtPosition (shootTarget);
+				//animator.SetBodyLookAtPosition (shootTarget); // Custom Extension method defined in Utils.cs
 
 				animator.SetIKPositionWeight (AvatarIKGoal.RightHand, ikWeights.handleWeight);
 				animator.SetIKPosition (AvatarIKGoal.RightHand, shootTarget);
@@ -115,6 +116,12 @@ public class GG_AnimationIK : GG_Animation
 			}
 		}
 	}
+
+/*	void LateUpdate(){
+		if(shooting){
+			animator.SetBodyLookAtPosition (robotModel.spine, shootTarget, 1f); // Custom Extension method defined in Utils.cs
+		}
+	}*/
 
 	public void OnShootAnimationEvent (AnimationEvent val)
 	{

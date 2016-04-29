@@ -4,7 +4,7 @@ using System.Collections;
 public class CharacterAnimatorMove : MonoBehaviour
 {
 
-	Animator animator;
+	public Animator animator;
 	public Firearm fireArm;
 	IKHandling ikHandler;
 	public bool shoot;
@@ -14,7 +14,7 @@ public class CharacterAnimatorMove : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		animator = GetComponent<Animator> ();
+		//animator = GetComponentInChildren<Animator> ();
 		ikHandler = GetComponent<IKHandling> ();
 
 		if (shoot) {

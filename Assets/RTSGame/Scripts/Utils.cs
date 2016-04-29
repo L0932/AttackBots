@@ -70,5 +70,30 @@ public static class Utils
 		cube.transform.position = position;
 	}
 
+
+	//Extension Methods
+	public static void SetBodyLookAtPosition(this Animator _animator, Transform _spine, Vector3 _target, float _weight){
+		float angle = Vector3.Angle (_target - _animator.transform.position, _animator.transform.forward);
+		int sign = Vector3.Cross (_animator.transform.position, _target).z < 0 ? -1 : 1;
+
+		_spine.Rotate ((angle * sign) *  _weight, 0, 0);
+	}
+
+	public static Transform FindChildWithTag(this Transform _parent, string _tag ){
+		Transform child = _parent;
+
+		foreach(Transform t in child){
+			if(t.tag == _tag){
+				return t;
+			} else if (t.childCount > 0){
+				child = t.FindChildWithTag (_tag);
+				if(child){
+					return child;
+				}
+			}
+		}
+		return child;
+	}
+
 	//public static void GetChildWithTag
 }
