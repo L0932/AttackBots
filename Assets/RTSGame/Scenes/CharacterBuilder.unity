@@ -2166,18 +2166,23 @@ MonoBehaviour:
 Transform:
   m_PrefabParentObject: {fileID: 401970, guid: 565e5ed591901444b82fa437a56d0d46, type: 2}
   m_PrefabInternal: {fileID: 1468539751}
+--- !u!95 &1468539759 stripped
+Animator:
+  m_PrefabParentObject: {fileID: 9571990, guid: 565e5ed591901444b82fa437a56d0d46,
+    type: 2}
+  m_PrefabInternal: {fileID: 1468539751}
 --- !u!114 &1468539761
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1468539752}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe8f984f35e6b4b4c9a52669beae7f05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 1468539759}
   fireArm: {fileID: 1902099881}
   shoot: 1
   speed: 0
@@ -2405,7 +2410,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1634959455}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af7234e51cf1b4a42badfd3256302d15, type: 3}
   m_Name: 

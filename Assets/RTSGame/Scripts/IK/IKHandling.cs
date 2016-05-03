@@ -40,7 +40,7 @@ public class IKHandling : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		//animator = GetComponent<Animator> ();
+		animator = GetComponent<Animator> ();
 		//animationClips = animator.runtimeAnimatorController.animationClips;
 		animationSpeed = 1f;
 
@@ -51,15 +51,15 @@ public class IKHandling : MonoBehaviour
 	}
 	
 	// Update is called once per frame
-	void Update ()
+/*	void Update ()
 	{
-		Debug.DrawRay (transform.position, (lookPos.position - transform.position), Color.green);
-	}
+		//Debug.DrawRay (transform.position, (lookPos.position - transform.position), Color.green);
+	}*/
 
-	void LateUpdate(){
+/*	void LateUpdate(){
 		animator.SetBodyLookAtPosition (spine, lookPos.position, bodyLookAtWeight); // Custom Extension method defined in Utils.cs
 	}
-
+*/
 	void OnAnimatorIK ()
 	{
 		//Debug.Log ("Right Hand T Val: " + anim.GetFloat ("Animator.Right Hand T.y"));
@@ -82,7 +82,7 @@ public class IKHandling : MonoBehaviour
 		}
 
 		if (ikLookAtActive) {
-			animator.SetLookAtWeight (lookIKWeight, 0, headWeight, eyesWeight, clampWeight); // 0 for bodyWeight.
+		animator.SetLookAtWeight (lookIKWeight, bodyWeight, headWeight, eyesWeight, clampWeight); // 0 for bodyWeight.
 			animator.SetLookAtPosition (lookPos.position);
 		}
 

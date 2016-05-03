@@ -23,18 +23,26 @@ public class GG_AIController : GG_Controller
 		if (canMove) {
 			Vector3 dir = CalculateVelocity (GetFeetPosition ());
 
-			if (playerUnitDetected && animationComponent != null) {
-				animationComponent.Shoot (true);
+			if (animationComponent != null) {
 
-				if (primaryWeapon != null) {
-					primaryWeapon.FireWeapon (targetDirection);
+				animationComponent.NavAnimSetup (targetDirection);
+
+				if(playerUnitDetected) {
+					animationComponent.Shoot (true);
+
+					if (primaryWeapon != null) {
+						primaryWeapon.FireWeapon (targetDirection);
+					}
+
+					playerUnitDetected = false;
 				}
-
-				playerUnitDetected = false;
 			}
+
+
 
 			//Rotate towards targetDirection (filled in by CalculateVelocity)
 			RotateTowards (targetDirection);
+			controller.SimpleMove (targetDirection);
 		}
 	}
 
