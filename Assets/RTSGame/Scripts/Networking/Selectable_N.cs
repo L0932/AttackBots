@@ -2,23 +2,9 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class Selectable_N : NetworkBehaviour
+public class Selectable_N : SelectableComponent
 {
-	public LayerMask layerTest;
-
-	public Projector projectorComponent;
-	public GameObject statusBar;
-
-	private MouseController mouseController;
-	private GG_Controller controllerUnit;
-	private bool selected;
-
-	private bool hovered;
-	private bool registered;
-
-	public bool Selected { get { return selected; } set { selected = value; } }
-
-	void Awake ()
+	protected override void Awake ()
 	{
 		registered = false;
 		hovered = false;
@@ -29,9 +15,9 @@ public class Selectable_N : NetworkBehaviour
 		mouseController = MouseController.Instance;
 	}
 
-	public void ActivateUnitSelector ()
+	public override void ActivateUnitSelector ()
 	{
-		Debug.Log ("Activate unit selector");
+		Debug.Log ("Activate unit selector, Selecable_N");
 
 		if (!registered) {
 			//Debug.Log ("Activated Unit Selector");
@@ -53,7 +39,7 @@ public class Selectable_N : NetworkBehaviour
 		}
 	}
 
-	public void DeactivateUnitSelector ()
+	public override void DeactivateUnitSelector ()
 	{
 		if (registered) {
 			selected = false;
@@ -74,12 +60,12 @@ public class Selectable_N : NetworkBehaviour
 		}
 	}
 
-	void OnRightClick (MouseTarget _mouseTarget)
+	protected override void OnRightClick (MouseTarget _mouseTarget)
 	{
 		controllerUnit.OnPlayerCommand (_mouseTarget);
 	}
 
-	void OnMouseOver ()
+	protected override void OnMouseOver ()
 	{
 		if (!hovered) {
 			//MouseController.Instance.CurrentHoveredLayer = gameObject.layer;
@@ -99,7 +85,7 @@ public class Selectable_N : NetworkBehaviour
 		}*/
 	}
 
-	void OnMouseExit ()
+	protected override void OnMouseExit ()
 	{
 		if (hovered) {
 			//if (mouseController != null) { 
@@ -112,9 +98,9 @@ public class Selectable_N : NetworkBehaviour
 
 	public override void OnStartLocalPlayer ()
 	{
+		Debug.Log ("Local player IS");
 		projectorComponent.material = Resources.Load ("Materials/Projector_LocalPlayer", typeof(Material)) as Material;
 
 		//Material mat = projectorComponent.material = Resources.Load ("Materials/Projectors/Projector_LocalPlayer", typeof(Material)) as Material;
-
 	}
 }

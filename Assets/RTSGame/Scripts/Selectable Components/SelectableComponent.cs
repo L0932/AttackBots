@@ -1,23 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class SelectableComponent : MonoBehaviour
+public class SelectableComponent : NetworkBehaviour
 {
 	public LayerMask layerTest;
 
 	public Projector projectorComponent;
 	public GameObject statusBar;
 
-	private MouseController mouseController;
-	private GG_Controller controllerUnit;
-	private bool selected;
+	protected MouseController mouseController;
+	protected GG_Controller controllerUnit;
+	protected bool selected;
 
-	private bool hovered;
-	private bool registered;
+	protected bool hovered;
+	protected bool registered;
 
 	public bool Selected { get { return selected; } set { selected = value; } }
 
-	void Awake ()
+    protected virtual void Awake ()
 	{
 		registered = false;
 		hovered = false;
@@ -31,7 +32,7 @@ public class SelectableComponent : MonoBehaviour
 		projectorComponent.material = Resources.Load ("Materials/Projector_LocalPlayer", typeof(Material)) as Material;
 	}
 
-	public void ActivateUnitSelector ()
+	public virtual void ActivateUnitSelector ()
 	{
 		//Debug.Log ("Activate unit selector");
 
@@ -53,7 +54,7 @@ public class SelectableComponent : MonoBehaviour
 		}
 	}
 
-	public void DeactivateUnitSelector ()
+	public virtual void DeactivateUnitSelector ()
 	{
 		if (registered) {
 			selected = false;
@@ -72,38 +73,21 @@ public class SelectableComponent : MonoBehaviour
 		}
 	}
 
-	void OnRightClick (MouseTarget _mouseTarget)
+	protected virtual void OnRightClick (MouseTarget _mouseTarget)
 	{
 		controllerUnit.OnPlayerCommand (_mouseTarget);
 	}
 
-	void OnMouseOver ()
+	protected virtual void OnMouseOver ()
 	{
 		if (!hovered) {
-			//MouseController.Instance.CurrentHoveredLayer = gameObject.layer;
-
-			//if (mouseController != null) {
-			//	mouseController.CurrentMouseOverLayer = gameObject.layer;
-			//}
 			hovered = true;
 		}
-		/*
-		LayerMask layerMask = gameObject.layer;
-		//Debug.Log (layerTest.value);
-
-		//MouseSelection.Instance.
-		if (layerTest == (layerTest | (1 << gameObject.layer))) {
-			Debug.Log ("You're hovering over a/an " + layerMask.value);
-		}*/
 	}
 
-	void OnMouseExit ()
+	protected virtual void OnMouseExit ()
 	{
 		if (hovered) {
-			//if (mouseController != null) { 
-			//	mouseController.CurrentMouseOverLayer = 0;
-			//	}
-			//MouseController.Instance.CurrentHoveredLayer = 0;
 			hovered = false;
 		}
 	}

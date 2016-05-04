@@ -1009,7 +1009,6 @@ GameObject:
   - 4: {fileID: 440818183}
   - 114: {fileID: 440818182}
   - 114: {fileID: 440818181}
-  - 114: {fileID: 440818184}
   m_Layer: 10
   m_Name: NetworkManager
   m_TagString: Untagged
@@ -1087,7 +1086,7 @@ MonoBehaviour:
     m_ReactorMaximumReceivedMessages: 1024
     m_ReactorMaximumSentMessages: 1024
     m_MaxPacketSize: 2000
-  m_Channels: 
+  m_Channels: 0500000000000000
   m_UseWebSockets: 0
   m_UseSimulator: 0
   m_SimulatedLatency: 1
@@ -1110,17 +1109,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &440818184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 440818180}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4108d0236899318478f75706c9bed9ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &458114938 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 144490, guid: c2959fb9f0c7afc49a81db10f4278bf1, type: 2}
