@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.Networking;
 
-public class HealthScaler : MonoBehaviour
+public class HealthScaler : NetworkBehaviour
 {
 	//public delegate void HealthUpdate ();
 
@@ -13,7 +14,7 @@ public class HealthScaler : MonoBehaviour
 		yAxis,
 		zAxis
 	}
-
+	[SyncVar]
 	public float currentHealth = 1f;
 	public float maxHealth = 1f;
 
@@ -29,13 +30,13 @@ public class HealthScaler : MonoBehaviour
 	public Color maxColor = Color.green;
 
 	// Use this for initialization
-	void Start ()
+	protected virtual void Start ()
 	{
 		image = GetComponent<Image> ();
 	}
 	
 	// Update is called once per frame
-	void Update ()
+	protected virtual void Update ()
 	{
 		transform.localScale = new Vector3 (currentHealth / maxHealth, transform.localScale.y, transform.localScale.z);
 
@@ -57,5 +58,10 @@ public class HealthScaler : MonoBehaviour
 			if (OnHealthZero != null)
 				OnHealthZero ();
 		}*/
+	}
+
+	public virtual void AffectNormalizedHealth(float amount)
+	{
+		currentHealth += amount;
 	}
 }

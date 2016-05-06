@@ -2,21 +2,18 @@
 using System.Collections;
 using UnityEngine.Networking;
 
-public class Firearm_N : NetworkBehaviour
+public class Firearm_N : Firearm
 {
 	//public Transform target;
+	public override void FireWeapon(Vector3 dir){
+		StartCoroutine (Fire (dir));
+	}
 
-	public GameObject projectile;
-	public Transform shotPoint;
-
-	//temp for debugging.
-	public Transform target;
-
-	[Command]
+/*	[Command]
 	public void CmdFireWeapon (Vector3 dir)
 	{
 		StartCoroutine (Fire (dir));
-	}
+	}*/
 
 	/*	void Update ()
 	{

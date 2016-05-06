@@ -10,7 +10,8 @@ GameObject:
   - 224: {fileID: 22484886}
   - 222: {fileID: 22250260}
   - 114: {fileID: 11469940}
-  - 114: {fileID: 11417076}
+  - 114: {fileID: 11411330}
+  - 114: {fileID: 11490922}
   m_Layer: 14
   m_Name: Image
   m_TagString: Untagged
@@ -586,7 +587,8 @@ GameObject:
   - 4: {fileID: 488962}
   - 33: {fileID: 3387776}
   - 23: {fileID: 2391470}
-  - 114: {fileID: 11455148}
+  - 114: {fileID: 11417988}
+  - 114: {fileID: 11491352}
   m_Layer: 13
   m_Name: prop_sciFiGun_low
   m_TagString: Untagged
@@ -754,13 +756,13 @@ GameObject:
   - 4: {fileID: 441148}
   - 143: {fileID: 14326976}
   - 114: {fileID: 11457776}
-  - 114: {fileID: 11417982}
   - 114: {fileID: 11497270}
   - 114: {fileID: 11432500}
   - 114: {fileID: 11445458}
   - 114: {fileID: 11426002}
   - 114: {fileID: 11403134}
   - 114: {fileID: 11438828}
+  - 114: {fileID: 11494140}
   m_Layer: 14
   m_Name: GG_RobotIK_MP
   m_TagString: PlayerUnit
@@ -1227,7 +1229,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171750}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.455755, y: -0.00000023655593, z: 0.6135833}
+  m_LocalPosition: {x: -2.26, y: -0.00000023655593, z: 0.55}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 454158}
@@ -1954,6 +1956,38 @@ MonoBehaviour:
     m_Bits: 0
   projectorComponent: {fileID: 11949102}
   statusBar: {fileID: 133736}
+--- !u!114 &11411330
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 220
+    i1: 24
+    i2: 190
+    i3: 229
+    i4: 120
+    i5: 85
+    i6: 57
+    i7: 4
+    i8: 154
+    i9: 117
+    i10: 0
+    i11: 32
+    i12: 129
+    i13: 45
+    i14: 94
+    i15: 181
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11413432
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1976,25 +2010,6 @@ MonoBehaviour:
     headWeight: 1
     eyesWeight: 0
     clampWeight: 0.3
---- !u!114 &11417076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 105604}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52cb03285b61bd04cb1c55aaf585f66a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentHealth: 1
-  maxHealth: 1
-  selectedAxis: 0
-  image: {fileID: 0}
-  minValue: 0
-  maxValue: 1
-  minColor: {r: 1, g: 0, b: 0, a: 1}
-  maxColor: {r: 0, g: 1, b: 0, a: 1}
 --- !u!114 &11417228
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2006,27 +2021,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1145b7c55f2ba74aaa07bd44ec3e3e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackModule: {fileID: 11417982}
+  attackModule: {fileID: 0}
   detectableMask:
     serializedVersion: 2
     m_Bits: 8192
---- !u!114 &11417982
+--- !u!114 &11417988
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171750}
+  m_GameObject: {fileID: 160848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98c648acdd0ab0942bc024feb69f0454, type: 3}
+  m_Script: {fileID: 372142912, guid: 870353891bb340e2b2a9c8707e7419ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentFireArm: {fileID: 11455148}
-  attackNearbyThreats: 1
-  detectedThreats: []
-  activeNearbyThreatTarget: {fileID: 0}
-  unitController: {fileID: 11457776}
-  robotModel: {fileID: 0}
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 220
+    i1: 24
+    i2: 190
+    i3: 229
+    i4: 120
+    i5: 85
+    i6: 57
+    i7: 4
+    i8: 154
+    i9: 117
+    i10: 0
+    i11: 32
+    i12: 129
+    i13: 45
+    i14: 94
+    i15: 181
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &11426002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2058,7 +2088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4918fbb3619efab4c80c51f2ac72c8bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackModule: {fileID: 11417982}
+  attackModule: {fileID: 0}
   searchingTurnSpeed: 120
   searchingDuration: 4
   sightRange: 20
@@ -2126,21 +2156,7 @@ MonoBehaviour:
     i14: 94
     i15: 181
   m_ServerOnly: 0
-  m_LocalPlayerAuthority: 1
---- !u!114 &11455148
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 160848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da66a6984086f6d47a14380be3bd8114, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectile: {fileID: 157468, guid: 4e2bfae4016feb64ead5418e571bb728, type: 2}
-  shotPoint: {fileID: 494348}
-  target: {fileID: 0}
+  m_LocalPlayerAuthority: 0
 --- !u!114 &11457776
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2163,8 +2179,8 @@ MonoBehaviour:
   forwardLook: 1
   endReachedDistance: 0.2
   closestOnPathCheck: 1
-  attackModule: {fileID: 11417982}
-  healthScaler: {fileID: 11417076}
+  attackModule: {fileID: 0}
+  healthScaler: {fileID: 0}
   sleepVelocity: 0.4
   animationSpeed: 0.2
   endOfPathEffect: {fileID: 0}
@@ -2257,6 +2273,56 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+--- !u!114 &11490922
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1315c3ff26446bc48b0e9fd1174b06d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 1
+  maxHealth: 1
+  selectedAxis: 0
+  image: {fileID: 0}
+  minValue: 0
+  maxValue: 1
+  minColor: {r: 1, g: 0, b: 0, a: 1}
+  maxColor: {r: 0, g: 1, b: 0, a: 1}
+--- !u!114 &11491352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 160848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22ec4a2f8b12d144c81e9bb3863a3992, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  projectile: {fileID: 157468, guid: 62435ab84de7fab4eb044660eff53dd4, type: 2}
+  shotPoint: {fileID: 494348}
+  target: {fileID: 0}
+--- !u!114 &11494140
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 171750}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a13533242f3998428ae2d12e0c8820c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentFireArm: {fileID: 0}
+  attackNearbyThreats: 1
+  detectedThreats: []
+  activeNearbyThreatTarget: {fileID: 0}
+  unitController: {fileID: 0}
+  robotModel: {fileID: 0}
 --- !u!114 &11497270
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,43 +1,23 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
+using UnityEngine.Networking;
 
-public class AttackModuleIK : AttackModule
-{
-	//Inherited variables
-	//public bool attackNearbyThreats;
-	//public List<GameObject> detectedThreats;
-	//public Transform activeNearbyThreatTarget;
-	//[SerializeField] private Transform activeThreatTarget;
+public class AttackModule_N : AttackModule {
 
-	//Inherited Properties
-	// public Transform ActiveThreatTarget{get; set}
 	GG_AnimationIK animationIK;
 	public Model robotModel;
 
 	protected override void Awake ()
 	{
 		base.Awake ();
-
 		animationIK = GetComponentInChildren<GG_AnimationIK> ();//GetComponent<GG_AnimationIK> ();
 		animationIK.Event_OnShoot +=  OnShootStart;
 
 		robotModel = GetComponentInChildren<Model> ();
-		currentFireArm = GetComponentInChildren<Firearm> ();
+		currentFireArm = GetComponentInChildren<Firearm_N> ();
 	}
 
-
-	void OnDisable(){
-		animationIK.Event_OnShoot -= OnShootStart;
-	}
-
-	void ShootTarget ()
-	{
-		if (unitController.PlayerSelectedTarget != null) {
-			 
-		}
-	}
-
+	// Use this for initialization
 	public override void Update ()
 	{
 		// Begin Shooting if...
@@ -87,34 +67,15 @@ public class AttackModuleIK : AttackModule
 		}
 	}
 
-/*	public override void AddNearbyThreat (GameObject _threat)
-	{
-		//Debug.Log ("Target detected");
-		detectedThreats.Add (_threat);
+	// Callback timed with animation event
+	public override void OnShootStart(){
+		Debug.Log ("Calling networking firing command");
+		CmdFireWeapon ();
+	}
 
-		if (activeNearbyThreatTarget == null) {
-			activeNearbyThreatTarget = _threat.transform;
-		}
-			
-
-/*		if (_threat == unitController.PlayerSelectedTarget.transform.gameObject) {
-			if (isCurrentlyShooting) {
-				StopCoroutine ("ShootTarget");
-			}
-			StartCoroutine (ShootTarget (unitController.PlayerSelectedTarget.transform));
-		}*/
-	//}*/
-
-	public override void RemoveNearbyThreat (GameObject _threat)
-	{
-		//TODO: if the player has an enemy still selected, have this unit execute a follow until it 
-		//finds the enemy if this unit is set to follow targets. 
-
-		//Debug.Log ("Remove Nearby Threat called");
-
-		if (_threat.transform == activeNearbyThreatTarget.transform) {
-			activeNearbyThreatTarget = null; 
-		}
-		detectedThreats.Remove (_threat);
+	// For Networking purposes
+	[Command]
+	public void CmdFireWeapon(){
+		currentFireArm.FireWeapon (activeNearbyThreatTarget.position - transform.position);
 	}
 }

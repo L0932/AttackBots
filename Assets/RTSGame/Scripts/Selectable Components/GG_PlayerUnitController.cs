@@ -55,6 +55,7 @@ public class GG_PlayerUnitController : GG_Controller
 		// anim["awake"].normalizedTime = 1F;
 
 		//Call Start in base script (AIPath)
+		healthScaler = GetComponentInChildren<HealthScaler>(true);
 		attackModule = GetComponent<AttackModule> ();
 		animationComponent = GetComponentInChildren<GG_Animation> ();
 
@@ -210,7 +211,8 @@ public class GG_PlayerUnitController : GG_Controller
 			Projectile projectile = other.gameObject.GetComponent<Projectile> ();
 
 			if (healthScaler.currentHealth > 0f) {
-				healthScaler.currentHealth -= projectile.damage;
+				//healthScaler.currentHealth -= projectile.damage;
+				healthScaler.AffectNormalizedHealth(-projectile.damage);
 			}
 			if (healthScaler.currentHealth <= 0f) {
 				OnUnitDeath ();

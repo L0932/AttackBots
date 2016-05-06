@@ -15,13 +15,7 @@ public class RangeBounds : MonoBehaviour
 			Debug.LogError ("RangeBounds: an AttackModule needs to be attached to the parent of the object containing RangeBounds!");
 		}
 	}
-	
-	// Update is called once per frame
-	void Update ()
-	{
-
-	}
-
+		
 	void OnTriggerEnter (Collider other)
 	{
 		if ((detectableMask.value & (1 << other.gameObject.layer)) > 0) {

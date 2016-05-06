@@ -9,6 +9,9 @@ public class AttackModule : NetworkBehaviour
 	public bool attackNearbyThreats;
 	public List<GameObject> detectedThreats;
 
+	protected bool isCurrentlyShooting;
+
+
 	public Transform activeNearbyThreatTarget;
 	[SerializeField] public GG_PlayerUnitController unitController;
 	//[SerializeField] protected Transform playerSelectedTarget;
@@ -31,7 +34,7 @@ public class AttackModule : NetworkBehaviour
 		}
 	}*/
 	 
-	void Awake ()
+	protected virtual void Awake ()
 	{
 		unitController = GetComponent<GG_PlayerUnitController> ();
 	}
@@ -46,19 +49,13 @@ public class AttackModule : NetworkBehaviour
 	}
 
 
-	public virtual void AddNearbyThreat (GameObject _threat)
+	public void AddNearbyThreat (GameObject _threat)
 	{
-		/*
-		if (unitController.PlayerSelectedTarget == null) {
-			unitController.PlayerSelectedTarget.transform = _threat.transform;
-		}*/
-		GameObject _mouseSelectedTarget = unitController.PlayerSelectedTarget.selectedTransform.gameObject;
-
-		if (_mouseSelectedTarget != null && _threat == _mouseSelectedTarget) {
-			Debug.Log ("Selected Target added to nearby threats! Override the targeting!");
-		}
-
 		detectedThreats.Add (_threat);
+
+		if (activeNearbyThreatTarget == null) {
+			activeNearbyThreatTarget = _threat.transform;
+		}
 	}
 
 	public virtual void RemoveNearbyThreat (GameObject _threat)
@@ -83,5 +80,12 @@ public class AttackModule : NetworkBehaviour
 		}
 
 		Debug.Log ("OnShootAnimationEvent() called in AttackModule");*/
+	}
+
+	public virtual void OnShootStart()
+	{
+		//robotModel.
+		//Debug.Log ("OnShootAnimationEvent called from attackModuleIK");
+		currentFireArm.FireWeapon (activeNearbyThreatTarget.position - transform.position);
 	}
 }

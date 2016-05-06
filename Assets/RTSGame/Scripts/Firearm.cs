@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.Networking;
 
-public class Firearm : MonoBehaviour
+public class Firearm : NetworkBehaviour
 {
 	//public Transform target;
 
@@ -11,7 +12,7 @@ public class Firearm : MonoBehaviour
 	//temp for debugging.
 	public Transform target;
 
-	public void FireWeapon (Vector3 dir)
+	public virtual void FireWeapon (Vector3 dir)
 	{
 		StartCoroutine (Fire (dir));
 	}
