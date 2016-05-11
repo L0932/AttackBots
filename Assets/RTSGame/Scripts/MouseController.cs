@@ -107,7 +107,7 @@ public class MouseController : Singleton<MouseController>
 		}*/
 	}
 
-	void PlayerSelection ()
+	protected virtual void PlayerSelection ()
 	{
 		foreach (SelectableComponent selectableUnit in FindObjectsOfType<SelectableComponent>()) {
 			if (IsWithinSelectionBounds (selectableUnit.gameObject)) {

@@ -5,7 +5,6 @@ using UnityEngine.Networking;
 public class Firearm : NetworkBehaviour
 {
 	//public Transform target;
-
 	public GameObject projectile;
 	public Transform shotPoint;
 

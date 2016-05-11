@@ -29,8 +29,8 @@ public class Selectable_N : SelectableComponent
 			if (controllerUnit != null)
 				controllerUnit.OnSelected ();
 
-			if (statusBar != null)
-				statusBar.SetActive (true);
+			if (healthBar != null)
+				healthBar.SetActive (true);
 
 			if (isLocalPlayer) {
 				MouseController.OnRightClick += OnRightClick;
@@ -50,8 +50,8 @@ public class Selectable_N : SelectableComponent
 			if (controllerUnit != null)
 				controllerUnit.OnDeselected ();
 
-			if (statusBar != null)
-				statusBar.SetActive (false);
+			if (healthBar != null)
+				healthBar.SetActive (false);
 
 			if (isLocalPlayer) {
 				MouseController.OnRightClick -= OnRightClick;

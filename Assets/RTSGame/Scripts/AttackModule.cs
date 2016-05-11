@@ -33,6 +33,11 @@ public class AttackModule : NetworkBehaviour
 			playerSelectedTarget = value;
 		}
 	}*/
+
+	void OnStartAuthority(){
+		Debug.Log ("This AttackModule has authority!");
+	}
+
 	 
 	protected virtual void Awake ()
 	{

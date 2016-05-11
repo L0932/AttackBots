@@ -7,7 +7,7 @@ public class SelectableComponent : NetworkBehaviour
 	public LayerMask layerTest;
 
 	public Projector projectorComponent;
-	public GameObject statusBar;
+	public GameObject healthBar;
 
 	protected MouseController mouseController;
 	protected GG_Controller controllerUnit;
@@ -24,6 +24,8 @@ public class SelectableComponent : NetworkBehaviour
 		hovered = false;
 
 		projectorComponent = GetComponentInChildren<Projector> ();
+		healthBar = GetComponentInChildren<BillboardTransform> ().gameObject;
+
 		controllerUnit = GetComponent<GG_Controller> ();
 
 		mouseController = MouseController.Instance;
@@ -46,8 +48,8 @@ public class SelectableComponent : NetworkBehaviour
 			if (controllerUnit != null)
 				controllerUnit.OnSelected ();
 
-			if (statusBar != null)
-				statusBar.SetActive (true);
+			if (healthBar != null)
+				healthBar.SetActive (true);
 			
 			MouseController.OnRightClick += OnRightClick;
 			registered = true;
@@ -65,8 +67,8 @@ public class SelectableComponent : NetworkBehaviour
 			if (controllerUnit != null)
 				controllerUnit.OnDeselected ();
 
-			if (statusBar != null)
-				statusBar.SetActive (false);
+			if (healthBar != null)
+				healthBar.SetActive (false);
 			
 			MouseController.OnRightClick -= OnRightClick;
 			registered = false;

@@ -7,6 +7,10 @@ public class AttackModule_N : AttackModule {
 	GG_AnimationIK animationIK;
 	public Model robotModel;
 
+	public override void OnStartAuthority(){
+		Debug.Log ("This AttackModule_N has authority!");
+	}
+
 	protected override void Awake ()
 	{
 		base.Awake ();

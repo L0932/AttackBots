@@ -20,6 +20,10 @@ public class Firearm_N : Firearm
 		Debug.DrawRay (shotPoint.position, target.position - shotPoint.position, Color.green);
 	}*/
 
+
+	void Start(){
+		Debug.Log("Firearm_N isLocalPlayer is :" + isLocalPlayer);
+	}
 	private IEnumerator Fire (Vector3 direction)
 	{
 		if (projectile != null) {
