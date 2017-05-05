@@ -23,8 +23,6 @@ public class UnitSelector : MonoBehaviour {
 		healthBar = GetComponentInChildren<BillboardTransform> (true).gameObject;
 
 		mouseController = MouseController.Instance;
-
-		projectorComponent.material = Resources.Load ("Materials/Projector_LocalPlayer", typeof(Material)) as Material;
 	}
 
 	public virtual void ActivateUnitSelector ()

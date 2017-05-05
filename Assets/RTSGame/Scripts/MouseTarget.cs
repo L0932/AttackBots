@@ -9,6 +9,7 @@ public enum TargetType
 	EnemyUnit,
 	PlayerUnit,
 	Friendly,
+    Obstacle,
 }
 
 public class MouseTarget : MonoBehaviour

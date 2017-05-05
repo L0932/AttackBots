@@ -24,14 +24,8 @@ public class SelectableComponent : NetworkBehaviour
 		hovered = false;
 
 		projectorComponent = GetComponentInChildren<Projector> ();
-		healthBar = GetComponentInChildren<BillboardTransform> ().gameObject;
-
 		controllerUnit = GetComponent<GG_Controller> ();
-
-		mouseController = MouseController.Instance;
-
-		// Single Player Script. Change Color for Player units.
-		projectorComponent.material = Resources.Load ("Materials/Projector_LocalPlayer", typeof(Material)) as Material;
+		//mouseController = MouseController.Instance;
 	}
 
 	public virtual void ActivateUnitSelector ()

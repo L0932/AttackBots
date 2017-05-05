@@ -60,25 +60,6 @@ public class MouseController : Singleton<MouseController>
 		if (isSelecting) {
 			PlayerSelection ();
 		}
-
-
-
-		// Mouse Zoom
-
-		/*	if (Input.GetAxis ("Mouse ScrollWheel") < 0) {
-			Camera.main.orthographicSize = Mathf.Max (Camera.main.orthographicSize - 1, 1);
-			Debug.Log ("Max");
-		} else if (Input.GetAxis ("Mouse ScrollWheel") > 0) {
-			Camera.main.orthographicSize = Mathf.Min (Camera.main.orthographicSize - 1, 6);
-			Debug.Log ("Min");
-		}*/
-
-
-/*
-		cameraDistanceY += Input.GetAxis ("Mouse ScrollWheel") * scrollSpeed;
-
-		Vector3 cameraPos = cameraControl.position;
-		//Camera.main.transform.position = new Vector3*/
 		MouseZoom ();
 	}
 
@@ -109,7 +90,7 @@ public class MouseController : Singleton<MouseController>
 
 	protected virtual void PlayerSelection ()
 	{
-		foreach (SelectableComponent selectableUnit in FindObjectsOfType<SelectableComponent>()) {
+		foreach (UnitSelector selectableUnit in FindObjectsOfType<UnitSelector>()) {
 			if (IsWithinSelectionBounds (selectableUnit.gameObject)) {
 				selectableUnit.ActivateUnitSelector ();
 				//currentSelectableUnits.Add (selectableUnit);
@@ -127,7 +108,6 @@ public class MouseController : Singleton<MouseController>
 		if (Physics.Raycast (ray, out hit, Mathf.Infinity)) {
 			//pass right click target to callback
 			string hitLayerName = LayerMask.LayerToName (hit.transform.gameObject.layer);
-			
 			mouseTarget.transform.position = hit.point;
 			mouseTarget.SetTargetType (hitLayerName);
 			mouseTarget.selectedTransform = hit.transform;

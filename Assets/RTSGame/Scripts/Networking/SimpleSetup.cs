@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public class SimpleSetup : MonoBehaviour
 {
 	// Matchmaker related
-	List<MatchDesc> m_MatchList = new List<MatchDesc>();
+	List<MatchInfoSnapshot> m_MatchList = new List<MatchInfoSnapshot>();
 	bool m_MatchCreated;
 	bool m_MatchJoined;
 	MatchInfo m_MatchInfo;
@@ -87,28 +87,25 @@ public class SimpleSetup : MonoBehaviour
 			if (GUILayout.Button("Shutdown"))
 			{
 				m_NetworkMatch.DropConnection(m_MatchInfo.networkId, 
-					m_MatchInfo.nodeId, OnConnectionDropped);
+					m_MatchInfo.nodeId, 0, OnConnectionDropped);
 			}
 		}
 		else
 		{
 			if (GUILayout.Button("Create Room"))
 			{
-				m_NetworkMatch.CreateMatch(m_MatchName, 4, true, "", OnMatchCreate);
+				m_NetworkMatch.CreateMatch(m_MatchName, 4, true, "", "", "", 0, 0, OnMatchCreate);
 			}
 
 			if (GUILayout.Button("Join first found match"))
 			{
-				m_NetworkMatch.ListMatches(0, 1, "", (response) => {
-					if (response.success && response.matches.Count > 0)
-						m_NetworkMatch.JoinMatch (response.matches [0].networkId, "", OnMatchJoined);   
-				});
+                m_NetworkMatch.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
 			}
 
 			if (GUILayout.Button ("List rooms"))
 			{
-				m_NetworkMatch.ListMatches (0, 20, "", OnMatchList);
-			}
+                m_NetworkMatch.ListMatches(0, 10, "", true, 0, 0, OnMatchList);
+            }
 
 			if (m_MatchList.Count > 0)
 			{
@@ -118,13 +115,13 @@ public class SimpleSetup : MonoBehaviour
 			{
 				if (GUILayout.Button (match.name))
 				{
-					m_NetworkMatch.JoinMatch(match.networkId, "", OnMatchJoined);
+					m_NetworkMatch.JoinMatch(match.networkId, "", "", "", 0, 0, OnMatchJoined);
 				}
 			}
 		}
 	}
 
-	public void OnConnectionDropped(BasicResponse callback)
+	public void OnConnectionDropped(bool sucess, string extendedInfo)
 	{
 		Debug.Log("Connection has been dropped on matchmaker server");
 		NetworkTransport.Shutdown();
@@ -136,19 +133,19 @@ public class SimpleSetup : MonoBehaviour
 		m_ConnectionEstablished = false;
 	}
 
-	public void OnMatchCreate(CreateMatchResponse matchResponse)
+	public void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
 	{
-		if (matchResponse.success)
+		if (success)
 		{
 			Debug.Log("Create match succeeded");
-			Utility.SetAccessTokenForNetwork(matchResponse.networkId, 
-				new NetworkAccessToken(matchResponse.accessTokenString));
+			Utility.SetAccessTokenForNetwork(matchInfo.networkId, 
+				new NetworkAccessToken());
 
 			m_MatchCreated = true;
-			m_MatchInfo = new MatchInfo(matchResponse);
+			m_MatchInfo = new MatchInfo();
 
-			StartServer(matchResponse.address, matchResponse.port, matchResponse.networkId, 
-				matchResponse.nodeId);
+			StartServer(matchInfo.address, matchInfo.port, matchInfo.networkId, 
+				matchInfo.nodeId);
 		}
 		else
 		{
@@ -156,32 +153,32 @@ public class SimpleSetup : MonoBehaviour
 		}
 	}
 
-	public void OnMatchList(ListMatchResponse matchListResponse)
+	public void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matches)
 	{
-		if (matchListResponse.success && matchListResponse.matches != null)
+		if (success && matches != null)
 		{
-			m_MatchList = matchListResponse.matches;
+			m_MatchList = matches;
 		}
 	}
 
 	// When we've joined a match we connect to the server/host
-	public void OnMatchJoined(JoinMatchResponse matchJoin)
+	public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)
 	{
-		if (matchJoin.success)
+		if (success)
 		{
 			Debug.Log("Join match succeeded");
-			Utility.SetAccessTokenForNetwork(matchJoin.networkId, 
-				new NetworkAccessToken(matchJoin.accessTokenString));
+			Utility.SetAccessTokenForNetwork(matchInfo.networkId, 
+				new NetworkAccessToken());
 
 			m_MatchJoined = true;
-			m_MatchInfo = new MatchInfo(matchJoin);
+			m_MatchInfo = new MatchInfo();
 
-			Debug.Log ("Connecting to Address:" + matchJoin.address + 
-				" Port:" + matchJoin.port + 
-				" NetworKID: " + matchJoin.networkId + 
-				" NodeID: " + matchJoin.nodeId);
-			ConnectThroughRelay(matchJoin.address, matchJoin.port, matchJoin.networkId, 
-				matchJoin.nodeId);
+			Debug.Log ("Connecting to Address:" + matchInfo.address + 
+				" Port:" + matchInfo.port + 
+				" NetworKID: " + matchInfo.networkId + 
+				" NodeID: " + matchInfo.nodeId);
+			ConnectThroughRelay(matchInfo.address, matchInfo.port, matchInfo.networkId,
+                matchInfo.nodeId);
 		}
 		else
 		{

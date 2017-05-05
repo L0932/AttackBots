@@ -6,9 +6,11 @@ using System.Collections.Generic;
 
 //using System.Collections;
 
+// Fix Updates: https://docs.unity3d.com/Manual/UpgradeGuide54Networking.html
+
 public class HostGame : MonoBehaviour {
 
-	List<MatchDesc> matchList = new List<MatchDesc>();
+	List<MatchInfoSnapshot> matchList = new List<MatchInfoSnapshot>();
 	bool matchCreated;
 	NetworkMatch networkMatch;
 
@@ -19,17 +21,11 @@ public class HostGame : MonoBehaviour {
 
 	void OnGUI(){
 		if(GUILayout.Button("Create Room")){
-			CreateMatchRequest create = new CreateMatchRequest ();
-			create.name = "New Room";
-			create.size = 4;
-			create.advertise = true;
-			create.password = "";
-
-			networkMatch.CreateMatch (create, OnMatchCreate);
+            networkMatch.CreateMatch("New Room", 4, true, "", "", "", 0, 0, OnMatchCreate);
 		}
 
 		if(GUILayout.Button("List Rooms")){
-			networkMatch.ListMatches (0, 20, "", OnMatchList);
+			networkMatch.ListMatches (0, 10, "", true, 0, 0, OnMatchList);
 		}
 
 		if(matchList.Count > 0){
@@ -38,7 +34,7 @@ public class HostGame : MonoBehaviour {
 			foreach(var match in matchList){
 				if(GUILayout.Button(match.name)){
 					if(GUILayout.Button(match.name)){
-						networkMatch.JoinMatch (match.networkId, "", OnMatchJoined);
+						networkMatch.JoinMatch (match.networkId, "", "", "", 0, 0, OnMatchJoined);
 					}
 				}
 			}
@@ -46,29 +42,33 @@ public class HostGame : MonoBehaviour {
 		}
 	}
 
-	public void OnMatchCreate(CreateMatchResponse matchResponse){
-		if(matchResponse.success){
-			Debug.Log ("Create match succeeded");
-			matchCreated = true;
-			Utility.SetAccessTokenForNetwork (matchResponse.networkId, new NetworkAccessToken (matchResponse.accessTokenString));
-			NetworkServer.Listen (new MatchInfo (matchResponse), 9000);
-		}
-		else{
-			Debug.LogError ("Create match failed");
-		}
-	}
+    public void OnMatchCreate(bool success, string extendedInfo, MatchInfo matchInfo)
+    {
+        if (success)
+        {
+            Debug.Log("Create match succeeded");
+            matchCreated = true;
+            Utility.SetAccessTokenForNetwork(matchInfo.networkId, new NetworkAccessToken());
+            NetworkServer.Listen(new MatchInfo(), 9000);
+        }
+        else
+        {
+            Debug.LogError("Create match failed");
+        }
+    }
 
-	public void OnMatchList(ListMatchResponse matchListResponse)
-	{
-		if (matchListResponse.success && matchListResponse.matches != null)
-		{
-			networkMatch.JoinMatch(matchListResponse.matches[0].networkId, "", OnMatchJoined);
-		}
-	}
+    public void OnMatchList(bool success, string extendedInfo, List<MatchInfoSnapshot> matches)
+    {
+        if (success && matches != null)
+        {
+           // Implement this
+           //networkMatch.JoinMatch(matches.networkId, "", OnMatchJoined);
+        }
+    }
 
-	public void OnMatchJoined(JoinMatchResponse matchJoin)
+    public void OnMatchJoined(bool success, string extendedInfo, MatchInfo matchInfo)
 	{
-		if (matchJoin.success)
+		if (success)
 		{
 			Debug.Log("Join match succeeded");
 			if (matchCreated)
@@ -76,10 +76,10 @@ public class HostGame : MonoBehaviour {
 				Debug.LogWarning("Match already set up, aborting...");
 				return;
 			}
-			Utility.SetAccessTokenForNetwork(matchJoin.networkId, new NetworkAccessToken(matchJoin.accessTokenString));
+			Utility.SetAccessTokenForNetwork(matchInfo.networkId, new NetworkAccessToken());
 			NetworkClient myClient = new NetworkClient();
 			myClient.RegisterHandler(MsgType.Connect, OnConnected);
-			myClient.Connect(new MatchInfo(matchJoin));
+			myClient.Connect(new MatchInfo());
 		}
 		else
 		{

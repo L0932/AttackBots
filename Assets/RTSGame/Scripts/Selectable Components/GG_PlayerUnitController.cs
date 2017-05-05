@@ -95,17 +95,6 @@ public class GG_PlayerUnitController : GG_Controller
      */
 	public override void OnTargetReached ()
 	{
-		/*
-	        if (endOfPathEffect != null && Vector3.Distance(tr.position, lastTarget) > 1)
-	        {
-	            GameObject.Instantiate(endOfPathEffect, tr.position, tr.rotation);
-	            lastTarget = tr.position;
-	        }*/
-
-		//if (!selectableComponent.Selected)
-		//	target = null;
-		
-		//Debug.Log ("Target reached.");
 	}
 
 	public override Vector3 GetFeetPosition ()
@@ -122,65 +111,21 @@ public class GG_PlayerUnitController : GG_Controller
 
 	protected new void Update ()
 	{
-		if (canMove) {
-			Vector3 velocity = CalculateVelocity (GetFeetPosition ());
-			//Debug.DrawRay (GetFeetPosition (), dir, Color.green);
+        if (canMove)
+        {
+            Vector3 velocity = CalculateVelocity(GetFeetPosition());
 
+            if (animationComponent != null)
+            {
+                animationComponent.NavAnimSetup(velocity);
+            }
 
-			if (animationComponent != null) {
-				animationComponent.NavAnimSetup (velocity);
-				//if (target != null)
-				//animationComponent.MoveToTarget (target);
-			}
+            //Rotate character towards targetDirection (filled in by CalculateVelocity)
+            RotateTowards(targetDirection);
 
-			//Rotate character towards targetDirection (filled in by CalculateVelocity)
-			RotateTowards (targetDirection);
-
-			//RotateTowardsTarget (targetDirection);
-			controller.SimpleMove (velocity);
-
-			// Move character in direction
-			/*
-			if (controller != null) {
-				//controller.SimpleMove (dir);
-			}*/
-		}
-
-
-		//Get velocity in world-space
-		//Vector3 velocity;
-		/*
-		if (canMove) {
-			Vector3 dir = CalculateVelocity (GetFeetPosition ());
-
-			if (animationComponent != null)
-				animationComponent.NavAnimSetup (dir);
-
-			//Rotate towards targetDirection (filled in by CalculateVelocity)
-			RotateTowards (targetDirection);
-
-			dir.y = 0;
-			if (dir.sqrMagnitude > sleepVelocity * sleepVelocity) {
-				//If the velocity is large enough, move
-			} else {
-				//Otherwise, just stand still (this ensures gravity is applied)
-				dir = Vector3.zero;
-			}
-
-			if (controller != null) {
-				controller.SimpleMove (dir);
-				velocity = controller.velocity;
-			} else {
-				Debug.LogWarning ("No NavmeshController or CharacterController attached to GameObject");
-				velocity = Vector3.zero;
-			}
-		} else {
-			velocity = Vector3.zero;
-			animationComponent.SetSpeed (0f);
-			ResetPath ();
-			target = null;
-			return;
-		}*/
+            //RotateTowardsTarget (targetDirection);
+            controller.SimpleMove(velocity);
+        }
 	}
 
 	public void DisableSearch ()
@@ -230,9 +175,9 @@ public class GG_PlayerUnitController : GG_Controller
 	public override void OnPlayerCommand (MouseTarget _mouseTarget)
 	{
 
-		// Do what you need with the mouse target..
+        // Do what you need with the mouse target..
 
-		/*
+        /*
 		Debug.Log ("Name to Layer: " + LayerMask.NameToLayer ("EnemyUnit"));
 		Debug.Log ("Layer to Name: " + LayerMask.LayerToName (13));
 
@@ -240,20 +185,19 @@ public class GG_PlayerUnitController : GG_Controller
 			Debug.Log ("Attack the enemy!");
 		}*/
 
-		//string currentLayer = LayerMask.LayerToName (_mousearget.gameObject.layer);//MouseController.Instance.GetCurrentMouseOverLayerName ();
-		//Debug.Log ("RIGHT CLICK TARGET IS: " + _target);
-
+        //string currentLayer = LayerMask.LayerToName (_mousearget.gameObject.layer);//MouseController.Instance.GetCurrentMouseOverLayerName ();
+        //Debug.Log ("RIGHT CLICK TARGET IS: " + _target);
 		playerSelectedTarget = _mouseTarget;
 
 		switch (_mouseTarget.currentTargetType) {
 		case TargetType.EnemyUnit:
-			//playerSelectedTarget = _mouseTarget;
-			target = null;
+            //playerSelectedTarget = _mouseTarget;
+            UpdateTarget(null);
 			//Debug.Log ("Hostile detected!");
 			break;
 		case TargetType.Walkable:
 			//playerSelectedTarget = null;
-			target = playerSelectedTarget.transform;
+			UpdateTarget(playerSelectedTarget.transform);
 			//Debug.Log ("Move to position!");
 			break;
 		}
