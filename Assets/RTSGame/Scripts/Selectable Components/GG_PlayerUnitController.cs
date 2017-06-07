@@ -105,8 +105,6 @@ public class GG_PlayerUnitController : GG_Controller
 	public void RotateTowardsTarget (Vector3 _relativeDirection)
 	{
 		transform.rotation = Quaternion.LookRotation (_relativeDirection);
-
-		//RotateTowards (_dir);
 	}
 
 	protected new void Update ()
@@ -115,15 +113,9 @@ public class GG_PlayerUnitController : GG_Controller
         {
             Vector3 velocity = CalculateVelocity(GetFeetPosition());
 
-            if (animationComponent != null)
-            {
-                animationComponent.NavAnimSetup(velocity);
-            }
-
-            //Rotate character towards targetDirection (filled in by CalculateVelocity)
+            if (animationComponent) animationComponent.NavAnimSetup(velocity);
+            
             RotateTowards(targetDirection);
-
-            //RotateTowardsTarget (targetDirection);
             controller.SimpleMove(velocity);
         }
 	}
@@ -167,7 +159,6 @@ public class GG_PlayerUnitController : GG_Controller
 
 	void OnUnitDeath ()
 	{
-		Debug.Log ("I'm Dying..");
 		canMove = false;
 		animationComponent.Die (true);
 	}

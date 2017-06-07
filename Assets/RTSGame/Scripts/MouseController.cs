@@ -111,8 +111,7 @@ public class MouseController : Singleton<MouseController>
 			mouseTarget.transform.position = hit.point;
 			mouseTarget.SetTargetType (hitLayerName);
 			mouseTarget.selectedTransform = hit.transform;
-			
-
+                
 			if (OnRightClick != null && mouseTarget != null)
 				OnRightClick (mouseTarget);
 		}
